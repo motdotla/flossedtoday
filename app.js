@@ -1,9 +1,4 @@
-var dotenv      = require('dotenv');
-dotenv.load();
-
-var e           = module.exports;
-e.ENV           = process.env.NODE_ENV || 'development';
-
+var c           = require('./constants').constants;
 var models      = require('./models');
 var Reminder    = models.Reminder;
 
@@ -14,9 +9,7 @@ server          = new Hapi.Server(+port, '0.0.0.0', { cors: true });
 var home = {
   index: {
     handler: function (request) {
-      Reminder.answeredYes('scott.motte@sendgrid.com', function(err, res) {
-        request.reply({success: true}); 
-      });
+      request.reply({success: true, message: 'You are using FlossedToday. See README for instructions.'}); 
     }
   }
 }
@@ -24,8 +17,23 @@ var home = {
 var inbound = {
   index: {
     handler: function (request) {
-      // This is where the reply should happen
-      request.reply({success: true}); 
+      var payload = request.payload;
+
+      console.log(payload);
+
+      if (payload.envelope) { envelope  = JSON.parse(payload.envelope) }; 
+
+      var reply_html = payload.html.replace(c.BODY, "").toLowerCase();
+
+      if (reply_html.indexOf("yes") >= 0) {
+        Reminder.answeredYes(envelope.from, function(err, res) {
+          request.reply({success: true}); 
+        });
+      } else {
+        console.log("Reply did not include 'Yes'");
+
+        request.reply({success: true});
+      }
     }
   }
 }

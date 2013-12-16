@@ -77,6 +77,7 @@ var Reminder = module.exports.Reminder = function(self){
 Reminder.send = function(to, fn) {
   var payload = {
     to:       to,
+    replyto:  c.REPLYTO,
     from:     c.FROM,
     subject:  c.SUBJECT,
     text:     c.BODY
