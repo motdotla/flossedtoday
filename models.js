@@ -86,7 +86,14 @@ Reminder.runTask = function(fn) {
   Flosser.all(function(err, emails) {
     if (err) { return fn(err, null); }
 
+    console.log(emails);
+    
+    if (!emails.length) {
+      return fn(null, true);
+    }
+
     //iterate over flossers
+    var iterator = 0;
     emails.forEach(function(email) {
       var reminder = new Reminder({
         email: email
@@ -94,10 +101,13 @@ Reminder.runTask = function(fn) {
       reminder.create(function(err, res) {
         if (err) { console.log(err); }
         console.log(res);
+
+        iterator = iterator + 1;
+        if (iterator >= emails.length) {
+          fn(null, true);
+        }
       });
     });
-
-    fn(null, true);
   });
 };
 
