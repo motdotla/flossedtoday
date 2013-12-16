@@ -1,6 +1,8 @@
-# FlossedToday
+# Flossed Today
 
-Have you flossed today? This application will help remind you. It uses SendGrid's APIs to make it happen.
+![](https://raw.github.com/scottmotte/flossedtoday/master/flossedtoday.png)
+
+Have you flossed today? This application will help remind you. It uses SendGrid's APIs ([mail](http://sendgrid.com/docs/API_Reference/Web_API/mail.html) and [inbound parse](http://sendgrid.com/docs/API_Reference/Webhooks/parse.html)) to make it happen.
 
 ## Usage
 
