@@ -1,7 +1,7 @@
 var c           = require('./constants').constants;
 var models      = require('./models');
+var Flosser     = models.Flosser;
 var Reminder    = models.Reminder;
-
 
 var options = {
   views: {
@@ -55,8 +55,16 @@ var inbound = {
 var login = {
   success: {
     handler: function(request) {
-      request.session.user = request.payload.email;
-      request.reply({success: true});
+      var email = request.payload.email;
+      console.log(email);
+
+      var flosser = new Flosser({
+        email: email
+      }); 
+
+      flosser.create(function(err, res) {
+        request.reply({success: true});
+      });
     }
   }
 }

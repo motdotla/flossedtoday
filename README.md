@@ -21,9 +21,11 @@ ngrok 3000
 
 Setup [SendGrid's Parse API](http://sendgrid.com/developer/reply). It will look something like the following. The `flossedtoday.bymail.in` should be the same value you set in the `REPLYTO` environment variable.
 
-![](https://raw.github.com/scottmotte/sendgrid-parse-api-example/master/inbound-setup-example.png)
+![](https://raw.github.com/scottmotte/flossedtoday/master/inbound-setup-example.png)
 
 For example, you could use `yourusername.bymail.in`.
+
+Visit [localhost:3000](http://localhost:3000) and sign up with your email.
 
 The last step is to run `task.js`.
 

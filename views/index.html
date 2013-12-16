@@ -8,6 +8,7 @@
       Have you flossed today?
     </title>
     <link href='/stylesheets/index.css' rel='stylesheet' type='text/css' />
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
   </head>
   <body>
     <div id='content'>
@@ -26,7 +27,9 @@
           <script>
             handshake.script.addEventListener('handshake:login_confirm', function(e) {
               console.log(e.data);
-              window.location.href = "/dashboard";
+              $.post("/login/success", {email: e.data.identity.email}, function(data) {
+                window.location.href = "/dashboard";
+              });    
             }, false); 
           </script>
 
