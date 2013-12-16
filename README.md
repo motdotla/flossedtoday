@@ -46,6 +46,7 @@ heroku create
 heroku addons:add scheduler
 heroku addons:add sendgrid
 heroku addons:add redistogo
+heroku config:set REPLYTO=inbound@yoursendgridusername.bymail.in
 git push heroku master
 ```
 
@@ -53,10 +54,18 @@ Then setup heroku scheduler to run once every hour like the following:
 
 ![](https://raw.github.com/scottmotte/flossedtoday/master/heroku-scheduler-example.png)
 
-That's it. Now go and signup and tell others to signup. They will start receiving email messages asking if they flossed today or not. If they reply yes then the reminders will stop. Otherwise, they will be reminded up to 3 more times that day.
+Then setup the SendGrid parse API to use the inbound@yoursendgridusername.bymail.in you setup as the REPLYTO.
+
+Type the following to get your sendgrid username and password. 
+
+```
+heroku config
+```
+
+Then go to <http://sendgrid.com/login>. After logging in with those credentials, visit the [parse settings](http://sendgrid.com/developer/reply). Set those up like the following, but with your inbound email and url of the app.
+
+![](https://raw.github.com/scottmotte/flossedtoday/master/inbound-setup-example.png)
 
 
-
-
-
+You'r done. Now go and signup and tell others to signup. They will start receiving email messages asking if they flossed today or not. If they reply yes then the reminders will stop. Otherwise, they will be reminded up to 3 more times that day.
 
