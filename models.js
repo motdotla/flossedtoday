@@ -31,6 +31,14 @@ var Flosser = module.exports.Flosser = function(self){
   return this;
 };
 
+Flosser.all = function(fn) {
+  db.SMEMBERS("flossers", function(err, emails) {
+    if (err) { return fn(err, null); }
+
+    fn(null, emails);
+  });
+};
+
 Flosser.findByEmail = function(email, fn) {
   db.HGETALL("flossers/"+email, function(err, res) {
     if (err) { return fn(err, null); }
@@ -72,6 +80,25 @@ var Reminder = module.exports.Reminder = function(self){
   this.email                = sanitize(self.email).trim().toLowerCase() || "";
 
   return this;
+};
+
+Reminder.runTask = function(fn) {
+  Flosser.all(function(err, emails) {
+    if (err) { return fn(err, null); }
+
+    //iterate over flossers
+    emails.forEach(function(email) {
+      var reminder = new Reminder({
+        email: email
+      }); 
+      reminder.create(function(err, res) {
+        if (err) { console.log(err); }
+        console.log(res);
+      });
+    });
+
+    fn(null, true);
+  });
 };
 
 Reminder.send = function(to, fn) {

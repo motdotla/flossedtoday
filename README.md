@@ -35,6 +35,15 @@ node ./task.js
 
 This will send you an email if the time is 16 UTC hour. If you want to change to your current UTC hour, change the `DEFAULT_REMINDER_HOUR_UTC` in the `.env` file. 
 
+## Installation
+
+```
+git clone https://github.com/scottmotte/flossedtoday
+cd flossedtoday
+heroku create
+git push heroku master
+heroku addons:add sendgrid
+```
 
 
 
