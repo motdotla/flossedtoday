@@ -9,6 +9,7 @@
   "description": "Don't forget to floss.",
   "dependencies": {
     "dotenv": "0.2.3",
+    "handlebars": "1.1.2",
     "hapi": "1.6.2",
     "moment": "2.4.0",
     "redis": "0.9.0",

@@ -2,14 +2,28 @@ var c           = require('./constants').constants;
 var models      = require('./models');
 var Reminder    = models.Reminder;
 
+
+var options = {
+  views: {
+    path: 'views',
+    engines: { html: 'handlebars' }
+  },
+  cors: true
+};
+
 var port        = parseInt(process.env.PORT) || 3000;
 var Hapi        = require('hapi');
-server          = new Hapi.Server(+port, '0.0.0.0', { cors: true });
+server          = new Hapi.Server(+port, '0.0.0.0', options);
 
-var home = {
+var main = {
   index: {
     handler: function (request) {
-      request.reply({success: true, message: 'You are using FlossedToday. See README for instructions.'}); 
+      request.reply.view('index.html');
+    }
+  },
+  dashboard: {
+    handler: function (request) {
+      request.reply.view('dashboard.html');
     }
   }
 }
@@ -38,16 +52,45 @@ var inbound = {
   }
 }
 
+var login = {
+  success: {
+    handler: function(request) {
+      request.session.user = request.payload.email;
+      request.reply({success: true});
+    }
+  }
+}
+
 server.route({
   method  : 'GET',
   path    : '/',
-  config  : home.index
+  config  : main.index
+});
+
+server.route({
+  method  : 'GET',
+  path    : '/dashboard',
+  config  : main.dashboard
 });
 
 server.route({
   method  : 'POST',
   path    : '/inbound',
   config  : inbound.index
+});
+
+server.route({
+  method  : 'POST',
+  path    : '/login/success',
+  config  : login.success
+});
+
+server.route({
+  method: 'GET',
+  path: '/{path*}',
+  handler: {
+    directory: { path: './public', listing: false, index: true }
+  }
 });
 
 server.start(function() {

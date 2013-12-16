@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang='en-us' xml:lang='en-us' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='content-type' />
+    <meta content='Have you flossed today?' name='description' />
+    <meta content='have you flossed today, flossed, floss, floss today, flossedtoday, todayflossed, flosstoday' name='keywords' />
+    <title>
+      Have you flossed today?
+    </title>
+    <link href='/stylesheets/index.css' rel='stylesheet' type='text/css' />
+  </head>
+  <body>
+    <div id='content'>
+      <div class='col' id='info'>
+        <div id='logo'>Flossed Today</div>
+        <p>
+          <b>Are you like me and do you forget to floss?</b>
+          <br />
+          <br />
+          Flossed Today reminds you to floss with a daily email. Enter your email below to get started.
+          <br />
+          <br />
+          <script src='/javascripts/handshake.js' 
+            data-app_name="flossedtoday" 
+            data-root_url="https://handshakejs.herokuapp.com"></script> 
+          <script>
+            handshake.script.addEventListener('handshake:login_confirm', function(e) {
+              console.log(e.data);
+              window.location.href = "/dashboard";
+            }, false); 
+          </script>
+
+          <br />
+          <br />
+        </p>
+        <hr/>
+        <p>
+          <b>Some History</b>
+          <br />
+          <br />
+          <b>>> On Dec 15th, 2013 I decided to bring back Flossed Today as an open source app.</b>
+          <br />
+          <br />
+          
+          <b>>> On February 4th, 2012 I decided to shut down Flossed Today.</b>
+          <br />
+          <br />
+          The app was inspired by Thoughtbot's
+          <a href='http://umbrellatoday.com'>umbrellatoday.com.</a>
+          With reminders from this app I actually started flossing and so did others.
+          <br />
+          <br />
+          Thank you to all who subscribed previous and subscribe now. Show off those pearly whites!
+          <br />
+          <br />
+          Best,
+          <br />
+          <a href='http://scottmotte.com'>
+            Scott Motte
+          </a>
+          <br />
+          <br />
+          P.S. Thank you
+          <a href='http://jgn.me'>
+            Jerome Gravel-Niquet
+          </a>
+          for the logo design and the original site design.
+        </p>
+        <p><i>"People who smoke cigarettes, they say 'You don't know how hard it is to quit smoking.' Yes I do. It's as hard as it is to start flossing."</i><br/><a href="http://en.wikipedia.org/wiki/Mitch_Hedberg">Mitch Hedberg</a></p>
+      </div>
+      <div class='clear'></div>
+    </div>
+    <div id='fader'></div>
+    <div id='modal'></div>
+    <div id='hide'></div>
+  </body>
+</html>
+
