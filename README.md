@@ -43,9 +43,17 @@ This will send you an email if the time is 16 UTC hour. If you want to change to
 git clone https://github.com/scottmotte/flossedtoday
 cd flossedtoday
 heroku create
-git push heroku master
+heroku addons:add scheduler
 heroku addons:add sendgrid
+heroku addons:add redistogo
+git push heroku master
 ```
+
+Then setup heroku scheduler to run once every hour like the following:
+
+![](https://raw.github.com/scottmotte/flossedtoday/master/heroku-scheduler-example.png)
+
+That's it. Now go and signup and tell others to signup. They will start receiving email messages asking if they flossed today or not. If they reply yes then the reminders will stop. Otherwise, they will be reminded up to 3 more times that day.
 
 
 
