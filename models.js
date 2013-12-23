@@ -116,16 +116,21 @@ Reminder.runTask = function(fn) {
     //iterate over flossers
     var iterator = 0;
     emails.forEach(function(email) {
-      var reminder = new Reminder({
-        email: email
-      }); 
-      reminder.create(function(err, res) {
-        if (err) { console.log(err); }
-        console.log(res);
+      Flosser.findByEmail(email, function(err, flosser) {
+        //make sure flosser has enabled reminders
+        if (flosser.enabled == "true") {
+          var reminder = new Reminder({
+            email: email
+          }); 
+          reminder.create(function(err, res) {
+            if (err) { console.log(err); }
+            console.log(res);
 
-        iterator = iterator + 1;
-        if (iterator >= emails.length) {
-          fn(null, true);
+            iterator = iterator + 1;
+            if (iterator >= emails.length) {
+              fn(null, true);
+            }
+          });
         }
       });
     });
