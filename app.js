@@ -52,6 +52,14 @@ var main = {
         request.reply.redirect("/");
       }
     }
+  },
+  logout: {
+    handler: function () {
+      var request = this;
+      var session = request.session.reset();
+
+      request.reply.redirect("/");
+    }
   }
 }
 
