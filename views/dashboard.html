@@ -1,11 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang='en-us' xml:lang='en-us' xmlns='http://www.w3.org/1999/xhtml'>
-  <head>
-    <title>Dashboard: Have you flossed today?</title>
-  </head>
-  <body>
-    <h1>Dashboard: Have you flossed today?</h1>
-    <p>This is where your settings will live. For now email me at <a href="mailto:scott.motte@sendgrid.com">scott.motte@sendgrid.com</a> to make changes.</p>
-  </body>
+<head>
+  <title>Dashboard: Have you flossed today?</title>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+<body>
+  <h1>Dashboard: Have you flossed today?</h1>
+  <p>Welcome, {{flosser.email}}</p>
+
+  <ul>
+    <li>
+      <label for="enabled">Enable reminders</label>
+      <input type="checkbox" id="enabled" name="enabled" value="true" {{#if flosser.enabled}}checked{{/if}}>
+    </li>
+  </ul>
+
+  <script>
+    $(function() {
+      $("#enabled:checkbox").change(function() {
+        var enabled   = $("#enabled:checkbox");
+        var isEnabled = enabled.is(":checked");
+        
+        var endpoint = "/flosser/disable";
+        if (!!isEnabled) {
+          endpoint = "/flosser/enable";
+        }
+        
+        $.get(endpoint, function() { });
+      });
+    });
+  </script>
+  
+</body>
 </html>
 

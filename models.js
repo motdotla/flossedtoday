@@ -27,6 +27,7 @@ var Flosser = module.exports.Flosser = function(self){
   this._validator         = new Validator();
   this.email              = sanitize(self.email).trim().toLowerCase() || "";
   this.reminder_hour_utc  = self.reminder_hour_utc || c.DEFAULT_REMINDER_HOUR_UTC;
+  this.enabled            = sanitize(""+self.enabled || "true").toBoolean();
 
   return this;
 };
@@ -68,6 +69,26 @@ Flosser.prototype.create = function(fn){
     db.HMSET(key, _this, function(err, res) {
       fn(err, _this);
     }); 
+  }
+
+  return this;
+};
+
+Flosser.prototype.update = function(fn){
+  var _this               = this;
+  var key                 = "flossers/"+_this.email;
+
+  this._validator.check(_this.enabled, "Enabled must be set to true or false.").isIn([true, false])
+
+  var errors = this._validator.errors();
+  delete(this._validator);
+
+  if (errors.length) {
+    fn(errors, null);
+  } else {
+    db.HMSET(key, _this, function(err, res) {
+      fn(err, _this);
+    });
   }
 
   return this;
