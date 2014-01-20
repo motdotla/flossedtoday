@@ -94,6 +94,25 @@ var flosser = {
         request.reply({success: true});
       });
     }
+  },
+  reminder_hour_utc: { 
+    handler: function () {
+      var request         = this;
+      var payload         = request.payload;
+      var session         = request.session;
+      var flosser_session = session.get('flosser');
+
+      var flosser = new Flosser({
+        email: flosser_session.email,
+        reminder_hour_utc: reminder_hour_utc
+      }); 
+
+      flosser.update(function(err, res) {
+        request.reply({success: true});
+      });
+
+    }
+
   }
 }
 
