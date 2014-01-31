@@ -64,7 +64,7 @@ heroku config
 
 Then go to <http://sendgrid.com/login>. After logging in with those credentials, visit the [parse settings](http://sendgrid.com/developer/reply). Set those up like the following, but with your inbound email and url of the app.
 
-![](https://raw.github.com/scottmotte/flossedtoday/master/inbound-setup-example.png)
+![](https://raw.github.com/scottmotte/flossedtoday/master/inbound-install-example.png)
 
 
 You'r done. Now go and signup and tell others to signup. They will start receiving email messages asking if they flossed today or not. If they reply yes then the reminders will stop. Otherwise, they will be reminded up to 3 more times that day.
