@@ -73,6 +73,9 @@
         new_reminder_hour_utc = UTC_HOURS[index_of_hour];
 
         $("#reminder_hour_utc").val(new_reminder_hour_utc);
+
+        var endpoint = "/flosser/reminder_hour_utc?reminder_hour_utc="+new_reminder_hour_utc;
+        $.get(endpoint, function() { });
       });
 
       // watch for checkbox change

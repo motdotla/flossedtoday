@@ -98,21 +98,19 @@ var flosser = {
   reminder_hour_utc: { 
     handler: function () {
       var request         = this;
-      var payload         = request.payload;
+      var query           = request.query;
       var session         = request.session;
       var flosser_session = session.get('flosser');
 
       var flosser = new Flosser({
         email: flosser_session.email,
-        reminder_hour_utc: reminder_hour_utc
+        reminder_hour_utc: query.reminder_hour_utc
       }); 
 
       flosser.update(function(err, res) {
         request.reply({success: true});
       });
-
     }
-
   }
 }
 
@@ -191,6 +189,11 @@ server.route([{
   method  : 'GET',
   path    : '/flosser/disable',
   config  : flosser.disable
+},
+{
+  method  : 'GET',
+  path    : '/flosser/reminder_hour_utc',
+  config  : flosser.reminder_hour_utc
 },
 {
   method: 'GET',
