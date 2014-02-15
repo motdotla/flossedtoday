@@ -187,7 +187,9 @@ Reminder.prototype.create = function(fn) {
     var reminder_hour_utc = +flosser.reminder_hour_utc;
     var current_hour_utc  = new Date().getHours();
 
-    if (+reminder_hour_utc - 12 >= +current_hour_utc) {
+    // instead of this current, it should check against their normal sending time.
+    var difference = current_hour_utc - reminder_hour_utc;
+    if (difference >= 0 && difference <= 4) {
       var err = new Error("The time has passed when you can send reminders for today.");
       return fn(err, null);
     }
