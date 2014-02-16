@@ -189,7 +189,7 @@ Reminder.prototype.create = function(fn) {
 
     // instead of this current, it should check against their normal sending time.
     var difference = current_hour_utc - reminder_hour_utc;
-    if (difference >= 0 && difference <= 4) {
+    if (difference < 0 || difference > 4) {
       var err = new Error("The time has passed when you can send reminders for today.");
       return fn(err, null);
     }
