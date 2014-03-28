@@ -166,9 +166,14 @@ server.route([{
   config  : main.index
 },
 {
-  method  : 'GET',
+  method  : 'get',
   path    : '/dashboard',
   config  : main.dashboard
+},
+{
+  method  : 'get',
+  path    : '/logout',
+  config  : main.logout
 },
 {
   method  : 'POST',
